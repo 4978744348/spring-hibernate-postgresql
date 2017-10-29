@@ -10,31 +10,37 @@ import com.datapeople.bean.Human;
 import com.datapeople.dao.DaoException;
 import com.datapeople.dao.HumanDao;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import javax.swing.*;
+
 
 
 public class HumanDaoImplHibernate implements HumanDao{
 	
-	private SessionFactory sesionFactory;
 	
-	public void setSesionFactory(SessionFactory sesionFactory) {
-		this.sesionFactory = sesionFactory;
-	}
-	
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Human> getAll() throws DaoException {
-		try{
-		Session session = this.sesionFactory.getCurrentSession();// here come is null!
-		List<Human> personsList = session.createQuery("from Human").list();
-		return personsList;
-		}catch(NullPointerException e){
-			System.out.println("cause: "+e.getCause());
-		}
-		return null;
 		
-			
-		
-		
+		Session session = null;
+	    List busses = new ArrayList<Human>();
+	    try {
+	      session = HibernateCongigurator.getSessionFactory().openSession();
+	      busses = session.createCriteria(Human.class).list();
+	    } catch (Exception e) {
+	      JOptionPane.showMessageDialog(null, e.getMessage(), "Ошибка 'getAll'", JOptionPane.OK_OPTION);
+	    } finally {
+	      if (session != null && session.isOpen()) {
+	        session.close();
+	      }
+	    }
+	    return busses;
 		
 	}
 

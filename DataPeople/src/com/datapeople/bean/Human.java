@@ -33,7 +33,7 @@ public class Human {
 	@Column(name="birth_date")
 	private Date birthDate;
 	
-	@Column(name="adresss_id")
+	// ?????????????????
 	private long adresssId;
 	
 	public long getId() {

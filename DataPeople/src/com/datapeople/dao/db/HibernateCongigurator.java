@@ -6,25 +6,19 @@ import org.hibernate.cfg.Configuration;
 public class HibernateCongigurator {
 
 	private static HibernateCongigurator instance;
-	private SessionFactory sesionFactory;
-
-	public static HibernateCongigurator getInstance() {
-		if (instance == null) {
-			synchronized (HibernateCongigurator.class) {
-				if (instance == null) {
-					instance = new HibernateCongigurator();
-				}
-			}
-		}
-		return instance;
-	}
 	
-	private HibernateCongigurator() {
-		sesionFactory = new Configuration().configure().buildSessionFactory();
-	}
+	  private static final SessionFactory sessionFactory;
+	    static {
+	      try {
+	        sessionFactory = new Configuration().configure().buildSessionFactory();
+	      } catch (Throwable ex) {
+	        System.err.println("Initial SessionFactory creation failed" + ex);
+	        throw new ExceptionInInitializerError(ex);
+	      }
+	    }
 
-	public SessionFactory getConfiguration() {
-		return sesionFactory;
-	}
+	    public static SessionFactory getSessionFactory() {
+	      return sessionFactory;
+	    }
 
 }

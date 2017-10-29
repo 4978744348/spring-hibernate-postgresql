@@ -8,19 +8,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="address")
-public class Address {
+@Table(name="streets")
+public class Street {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private  long id;
 	
-	//?????????
-	private long streetId;
-	
-	@Column(name="number_home")
-	private String houseNumber;
+	@Column(name="name_str")
+	private String nameStr;
 	
 	public long getId() {
 		return id;
@@ -28,21 +25,15 @@ public class Address {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public long getStreetId() {
-		return streetId;
+	public String getNameStr() {
+		return nameStr;
 	}
-	public void setStreetId(long streetId) {
-		this.streetId = streetId;
-	}
-	public String getHouseNumber() {
-		return houseNumber;
-	}
-	public void setHouseNumber(String houseNumber) {
-		this.houseNumber = houseNumber;
+	public void setNameStr(String nameStr) {
+		this.nameStr = nameStr;
 	}
 	
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", streetId=" + streetId + ", houseNumber=" + houseNumber + "]";
+		return "Street [id=" + id + ", nameStr=" + nameStr + "]";
 	}
 }

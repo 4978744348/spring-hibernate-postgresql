@@ -11,8 +11,8 @@
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-	 <context:component-scan base-package="com.datapeople.controller" /> 
-	
+	<context:component-scan base-package="com.datapeople.controller" />
+
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"
@@ -20,5 +20,24 @@
 		<property name="prefix" value="/WEB-INF/Pages/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+
+	 <!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="jdbc/Library" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+		
+		<property name="packagesToScan" value="com.datapeople.bean" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean> -->
 
 </beans>

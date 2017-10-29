@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-Hello jsp!
-
-<a href="HumanList.spr"> list of Human</a><br>
-<a href="HibHumanList.spr"> list of Hib Human</a>
-<a href="HumanServlet.do"> list of Human</a><br>
+<p>${listHumansHib}</p>
 </body>
 </html>
