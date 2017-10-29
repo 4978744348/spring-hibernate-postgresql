@@ -1,4 +1,4 @@
-package com.datapeople.controServ;
+package com.datapeople.controllerServlet;
 
 import java.io.IOException;
 import java.util.List;

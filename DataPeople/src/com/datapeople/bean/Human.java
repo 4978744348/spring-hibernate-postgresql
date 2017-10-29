@@ -1,28 +1,46 @@
 package com.datapeople.bean;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+
 
 @Entity
 @Table(name="human")
 public class Human {
 	
+	private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy.MM.dd");
+	
+	/*@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)*/
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GenericGenerator(name="hilo-strategy", strategy = "hilo")
+	@GeneratedValue(generator = "hilo-strategy")
+
 	@Column(name="id")
 	private long id;
 	
 	@Column(name="last_name")
 	private String lastName;
 	
-	@Column(name="name")
-	private String name;
+	@Column(name="first_name")
+	private String firstName;
 	
 	@Column(name="middle_name")
 	private String middleName;
@@ -31,10 +49,20 @@ public class Human {
 	private String sex;
 	
 	@Column(name="birth_date")
-	private Date birthDate;
+	private Date birthDate = new Date();
 	
-	// ?????????????????
-	private long adresssId;
+	@OneToOne
+	@JoinColumn(name="adress_id")
+	private Address adress;
+	
+	
+	public String getDateStr() {
+		return FORMATTER.format(birthDate);
+	}
+
+	public void setDateStr(String dateStr) throws ParseException {
+		birthDate = FORMATTER.parse(dateStr);
+	}
 	
 	public long getId() {
 		return id;
@@ -48,11 +76,11 @@ public class Human {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	public String getMiddleName() {
 		return middleName;
@@ -72,16 +100,18 @@ public class Human {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
-	public long getAdresssId() {
-		return adresssId;
+	public Address getAdress() {
+		return adress;
 	}
-	public void setAdresssId(long adresssId) {
-		this.adresssId = adresssId;
+	public void setAdress(Address adress) {
+		this.adress = adress;
 	}
 	@Override
 	public String toString() {
-		return "Human [id=" + id + ", lastName=" + lastName + ", name=" + name + ", middleName=" + middleName + ", sex="
-				+ sex + ", birthDate=" + birthDate + ", adresssId=" + adresssId + "]";
+		return "Human [id=" + id + ", lastName=" + lastName + ", firstName=" + firstName + ", middleName=" + middleName + ", sex="
+				+ sex + ", birthDate=" + birthDate + ", adress=" + adress + "]";
 	}
+	
+	
 	
 }

@@ -22,7 +22,7 @@
 		
 		<mapping class="com.datapeople.bean.Human"/>
 		<mapping class="com.datapeople.bean.Address"/>
-		<mapping class="com.datapeople.bean.Street"/>
+		 <mapping class="com.datapeople.bean.Street"/> 
 		
 	</session-factory>
 </hibernate-configuration>
